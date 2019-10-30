@@ -1,8 +1,65 @@
-/* add css styles here (optional) */
+@keyframes reactBackgroundProgressfadeIn {
+  from {
+    opacity: 0;
+  }
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+  to {
+    opacity: 1;
+  }
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.root {
+  /* So the rotation of a rectangle is always visible */
+  position: absolute;
+  top: -100vmax;
+  right: -100vmax;
+  bottom: -100vmax;
+  left: -100vmax;
+  z-index: -1;
+  opacity: 0;
+}
+
+.root * {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.visible {
+  animation-name: reactBackgroundProgressfadeIn;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+.half {
+  /* 49.99% so there is no hole between the two halves */
+  clip-path: polygon(49.99% 0%, 100% 0%, 100% 100%, 50% 100%);
+}
+
+.fill {
+  right: 50%;
+  background-color: #cfd8dc;
+}
+
+.rotate {
+  backface-visibility: hidden; /* Fix pixelized drawing; */
+}
+
+.rotate:not(.fill) {
+  transform-origin: center;
+}
+
+.rotate.fill {
+  transform-origin: right;
 }
